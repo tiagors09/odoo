@@ -1,0 +1,58 @@
+services:
+
+  db:
+    image: postgres:15
+    container_name: odoo16-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo_robovisor
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - odoo16
+
+  odoo:
+    image: odoo:16.0
+    container_name: odoo16
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    environment:
+      HOST: db
+      PORT: 5432
+      USER: odoo
+      PASSWORD: odoo_robovisor
+    volumes:
+      - odoo-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    networks:
+      - odoo16
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: odoo16-pgadmin
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: tiagorodriguessousa9@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: odoo_robovisor
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - odoo16
+
+networks:
+  odoo16:
+
+volumes:
+  postgres-data:
+  odoo-data:
+  pgadmin-data:
