@@ -1,0 +1,68 @@
+# Secrets / environment files
+*.env
+*.env.*
+!*.env.example
+
+# Environment directory files containing secrets
+env/*
+!env/*.env.example
+
+# Docker
+docker-compose.override.yml
+docker-compose.local.yml
+
+# Docker volumes / local data
+postgres-data/
+odoo-data/
+pgadmin-data/
+
+# Odoo
+*.pyc
+*.pyo
+__pycache__/
+*.log
+logs/
+filestore/
+sessions/
+*.tmp
+*.swp
+*.swo
+
+# PostgreSQL
+*.sql
+*.dump
+*.backup
+*.bak
+*.old
+
+# pgAdmin
+pgadmin-data/
+
+# Python
+.venv/
+venv/
+ENV/
+*.py[cod]
+*$py.class
+
+# IDEs / Editors
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Cache
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Backups
+backup/
+backups/
