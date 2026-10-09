@@ -1,5 +1,4 @@
 services:
-
   db:
     image: postgres:15
     container_name: odoo16-db
@@ -30,6 +29,7 @@ services:
       - odoo-data:/var/lib/odoo
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
+      - .:/workspace
     networks:
       - odoo16
 
